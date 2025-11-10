@@ -1,10 +1,10 @@
 package PessoalEnvolvido;
-import javax.swing.*;
 public class Pessoa {
     protected String nome;
     protected String cpf;
     protected String telefone;
     protected String endereco;
+
     //Primeiro construtor
     public Pessoa(String nome,String cpf,String telefone,String endereco){
         this.nome = nome;
@@ -12,29 +12,21 @@ public class Pessoa {
         this.telefone = telefone;
         this.endereco = endereco;
     }
-    // segundo construtor (vazio)
-    public Pessoa(){
-    // terceiro construtor
-    }
+    // Segundo construtor (vazio)
+    public Pessoa(){}
+    // Terceiro construtor (Recebe apenas o nome)
     public Pessoa(String nome){
         this.nome = nome;
     }
-    // Método de mostrar dados
-    public void mostrarDados(){
-        if(nome != null & cpf != null & telefone != null & endereco != null){
-            JOptionPane.showMessageDialog(null, "Nome: " + getNome() + "\n" + "CPF: " + getCpf() + "\n" + "Telefone: " + getTelefone() + "\n" + "Endereço: " + getEndereco(),"Dados:",JOptionPane.INFORMATION_MESSAGE);
-        }
-        else if(nome != null){
-            JOptionPane.showMessageDialog(null, "Nome: " + getNome(),"Nome do usuário:",JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Tente novamente","Erro",JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
+    // Método ToString para mostrar dados
+    @Override
+   public String toString(){
+    return "Nome: " + this.nome + "\n"+ "CPF: " + this.cpf + "\n"+ "Endereço: " + this.endereco;
+   }
+   // As validações setter e getters, apesar de não ser tão necessário decidir colocar pra testes
     public void setNome(String nome){
-        if(nome == null){
-            JOptionPane.showMessageDialog(null,"Digite um nome válido!","Erro",JOptionPane.ERROR_MESSAGE);
+        if(nome == null || nome.trim().isEmpty()){
+           throw new IllegalArgumentException("Nome não pode ser vazio. Tente novamente");
         }
         else{
            this.nome = nome;
@@ -45,8 +37,8 @@ public class Pessoa {
     }
 
     public void setCpf(String cpf){
-        if(cpf == null){
-            JOptionPane.showMessageDialog(null,"Digite um CPF válido!","Erro",JOptionPane.ERROR_MESSAGE);
+        if(cpf == null || cpf.trim() .isEmpty()){
+            throw new IllegalArgumentException("O Seu CPF não pode estar vazio");          
         }
         else{
            this.cpf = cpf;
@@ -56,8 +48,8 @@ public class Pessoa {
         return this.cpf;
     }
     public void setTelefone(String telefone){
-        if(telefone == null){
-            JOptionPane.showMessageDialog(null,"Digite um Telefone válido!","Erro",JOptionPane.ERROR_MESSAGE);
+        if(telefone == null || telefone.trim() .isEmpty()){
+           throw new IllegalArgumentException("O Telefone não pode estar vazio");
         }
         else{
            this.telefone = telefone;
@@ -67,8 +59,8 @@ public class Pessoa {
         return this.telefone;
     }
     public void setEndereco(String endereco){
-        if(endereco == null){
-            JOptionPane.showMessageDialog(null,"Digite um Endereço válido!","Erro",JOptionPane.ERROR_MESSAGE);
+        if(endereco == null || endereco.trim() .isEmpty()){
+            throw new IllegalArgumentException("O Endereço não pode estar vazio");
         }
         else{
            this.endereco = endereco;
